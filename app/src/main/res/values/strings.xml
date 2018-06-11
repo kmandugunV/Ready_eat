@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">REDET</string>
+    <string name="app_fullname">Ready Eat</string>
+    <string name="access_term">
+        이용약관 내용 쓰기
+        졸업프로젝트 화이팅
+        UI는 쉽다 재밌다
+        V2 가즈아
+        가나다라마바사 아자차카타파하</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
