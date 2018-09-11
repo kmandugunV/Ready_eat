@@ -20,6 +20,11 @@
         <activity android:name=".RegisterActivity"></activity>
         <activity android:name=".Register2Activity"></activity>
         <activity android:name=".Register_CommitActivity"></activity>
+        <activity android:name=".FindChooseActivity"></activity>
+        <activity android:name=".FindIdActivity"></activity>
+        <activity android:name=".FindPwdActivity"></activity>
+
     </application>
 
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
 </manifest>

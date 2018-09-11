@@ -9,52 +9,25 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 
 
-public class LoginActivity extends AppCompatActivity{
+public class FindChooseActivity extends AppCompatActivity{
 
+    Button btn_find_id, btn_find_pwd;
     boolean loginFlag;
-    Button btn_register, btn_find;
-    EditText login_id, login_pwd;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_find_choose);
 
         Intent intent = getIntent();
         loginFlag = intent.getExtras().getBoolean("loginFlag");
 
-
-        login_id = (EditText)findViewById(R.id.login_id);
-        login_id.setOnFocusChangeListener(new View.OnFocusChangeListener()
-        {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if(hasFocus)
-                {
-                    login_id.setText("");
-                }
-            }
-        });
-
-        login_pwd = (EditText)findViewById(R.id.login_pwd);
-        login_pwd.setOnFocusChangeListener(new View.OnFocusChangeListener()
-        {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if(hasFocus)
-                {
-                    login_pwd.setText("");
-                }
-            }
-        });
-
-        btn_register = (Button)findViewById(R.id.btn_register);
-        btn_register.setOnClickListener(new Button.OnClickListener() {
+        btn_find_id = (Button)findViewById(R.id.btn_find_id);
+        btn_find_id.setOnClickListener(new Button.OnClickListener() {
                     public void onClick(View v) {
-                        Intent intent = new Intent(LoginActivity.this , RegisterActivity.class);
+                        Intent intent = new Intent(FindChooseActivity.this , FindIdActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                         intent.putExtra("loginFlag",loginFlag);
                         startActivity(intent);
@@ -62,12 +35,12 @@ public class LoginActivity extends AppCompatActivity{
                 }
         );
 
-        btn_find = (Button)findViewById(R.id.btn_find);
-        btn_find.setOnClickListener(new Button.OnClickListener()
+        btn_find_pwd = (Button)findViewById(R.id.btn_find_pwd);
+        btn_find_pwd.setOnClickListener(new Button.OnClickListener()
         {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this , FindChooseActivity.class);
+                Intent intent = new Intent(FindChooseActivity.this , FindPwdActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 intent.putExtra("loginFlag",loginFlag);
                 startActivity(intent);
@@ -87,7 +60,7 @@ public class LoginActivity extends AppCompatActivity{
         ab.setDisplayShowTitleEnabled(true);
         ab.setDisplayHomeAsUpEnabled(true);
 
-        ab.setTitle("로그인/회원가입");
+        ab.setTitle("ID/비밀번호 찾기");
 
         return true ;
     }

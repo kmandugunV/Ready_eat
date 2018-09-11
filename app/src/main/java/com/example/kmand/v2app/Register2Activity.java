@@ -1,6 +1,8 @@
 package com.example.kmand.v2app;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
@@ -9,6 +11,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLEncoder;
 
 /**
  * Created by kmand on 2018-06-06.
@@ -17,10 +28,24 @@ import android.widget.Button;
 public class Register2Activity extends AppCompatActivity{
 
     boolean loginFlag;
+
+    private EditText name_regi2;
+    private EditText birth_regi2;
+    private EditText id_regi2;
+    private EditText pwd_regi2;
+    private EditText phone_regi2;
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register2);
+
+        name_regi2 = (EditText)findViewById(R.id.name_regi2);
+        birth_regi2 = (EditText)findViewById(R.id.birth_regi2);
+        id_regi2 = (EditText)findViewById(R.id.id_regi2);
+        pwd_regi2 = (EditText)findViewById(R.id.pwd_regi2);
+        phone_regi2 = (EditText)findViewById(R.id.phone_regi2);
 
         Intent intent = getIntent();
         loginFlag = intent.getExtras().getBoolean("loginFlag");
@@ -39,11 +64,79 @@ public class Register2Activity extends AppCompatActivity{
                 intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 intent.putExtra("loginFlag",loginFlag);
 
+                String name = name_regi2.getText().toString();
+                String birth = birth_regi2.getText().toString();
+                String id = id_regi2.getText().toString();
+                String pwd = pwd_regi2.getText().toString();
+                String phone = phone_regi2.getText().toString();
+
+                insertoToDatabase(name, birth, id, pwd, phone);
+
                 startActivity(intent);
             }
         });
     }
 
+    private void insertoToDatabase(String Name, String Birth, String Id, String Pwd, String Phone) {
+        class InsertData extends AsyncTask<String, Void, String> {
+            ProgressDialog loading;
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                loading = ProgressDialog.show(Register2Activity.this, "Please Wait", null, true, true);
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+                loading.dismiss();
+                Toast.makeText(getApplicationContext(), s, Toast.LENGTH_LONG).show();
+            }
+            @Override
+            protected String doInBackground(String... params) {
+
+                try {
+                    String Name = (String) params[0];
+                    String Birth = (String) params[1];
+                    String Id = (String) params[2];
+                    String Pwd = (String) params[3];
+                    String Phone = (String) params[4];
+
+                    String link = "http://localhost/post.php";
+                    String data = URLEncoder.encode("Name", "UTF-8") + "=" + URLEncoder.encode(Name, "UTF-8");
+                    data += "&" + URLEncoder.encode("Birth", "UTF-8") + "=" + URLEncoder.encode(Birth, "UTF-8");
+                    data += "&" + URLEncoder.encode("Id", "UTF-8") + "=" + URLEncoder.encode(Id, "UTF-8");
+                    data += "&" + URLEncoder.encode("Pwd", "UTF-8") + "=" + URLEncoder.encode(Pwd, "UTF-8");
+                    data += "&" + URLEncoder.encode("Phone", "UTF-8") + "=" + URLEncoder.encode(Phone, "UTF-8");
+
+                    URL url = new URL(link);
+                    URLConnection conn = url.openConnection();
+
+                    conn.setDoOutput(true);
+                    OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+
+                    wr.write(data);
+                    wr.flush();
+
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+
+                    StringBuilder sb = new StringBuilder();
+                    String line = null;
+
+                    // Read Server Response
+                    while ((line = reader.readLine()) != null) {
+                        sb.append(line);
+                        break;
+                    }
+                    return sb.toString();
+                } catch (Exception e) {
+                    return new String("Exception: " + e.getMessage());
+                }
+            }
+        }
+        InsertData task = new InsertData();
+        task.execute(Id, Pwd);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

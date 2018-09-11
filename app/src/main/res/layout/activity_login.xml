@@ -2,8 +2,11 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="250dp"
@@ -44,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="9"
                 android:ems="10"
-                android:inputType="phone"
+                android:inputType="text"
                 android:text="아이디"
                 android:textColor="@android:color/darker_gray" />
 

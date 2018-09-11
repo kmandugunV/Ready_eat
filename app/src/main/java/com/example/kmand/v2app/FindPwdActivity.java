@@ -7,74 +7,35 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 
 
-public class LoginActivity extends AppCompatActivity{
+public class FindPwdActivity extends AppCompatActivity{
 
+    Button btn_findpwd;
     boolean loginFlag;
-    Button btn_register, btn_find;
-    EditText login_id, login_pwd;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_find_pwd);
 
         Intent intent = getIntent();
         loginFlag = intent.getExtras().getBoolean("loginFlag");
-
-
-        login_id = (EditText)findViewById(R.id.login_id);
-        login_id.setOnFocusChangeListener(new View.OnFocusChangeListener()
-        {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if(hasFocus)
-                {
-                    login_id.setText("");
-                }
-            }
-        });
-
-        login_pwd = (EditText)findViewById(R.id.login_pwd);
-        login_pwd.setOnFocusChangeListener(new View.OnFocusChangeListener()
-        {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if(hasFocus)
-                {
-                    login_pwd.setText("");
-                }
-            }
-        });
-
-        btn_register = (Button)findViewById(R.id.btn_register);
-        btn_register.setOnClickListener(new Button.OnClickListener() {
+/*
+        btn_findpwd = (Button)findViewById(R.id.btn_findpwd);
+        btn_findpwd.setOnClickListener(new Button.OnClickListener() {
                     public void onClick(View v) {
-                        Intent intent = new Intent(LoginActivity.this , RegisterActivity.class);
+                        //if(true) { }
+
+                        Intent intent = new Intent(FindPwdActivity.this , FindedPwdActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                         intent.putExtra("loginFlag",loginFlag);
                         startActivity(intent);
                     }
                 }
         );
-
-        btn_find = (Button)findViewById(R.id.btn_find);
-        btn_find.setOnClickListener(new Button.OnClickListener()
-        {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this , FindChooseActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                intent.putExtra("loginFlag",loginFlag);
-                startActivity(intent);
-            }
-        });
-
-
+*/
     }
 
 
@@ -87,7 +48,7 @@ public class LoginActivity extends AppCompatActivity{
         ab.setDisplayShowTitleEnabled(true);
         ab.setDisplayHomeAsUpEnabled(true);
 
-        ab.setTitle("로그인/회원가입");
+        ab.setTitle("비밀번호 찾기");
 
         return true ;
     }
