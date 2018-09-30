@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
@@ -120,7 +121,7 @@ public class LoginActivity extends AppCompatActivity{
 
     }//onCreate
 
-    public class loginDB extends AsyncTask<Void, Integer, Void> {
+    public class loginDB extends AsyncTask<Void, Integer, String> {
 
         @Override
         protected void onPreExecute() {
@@ -128,7 +129,7 @@ public class LoginActivity extends AppCompatActivity{
         }
 
         @Override
-        protected Void doInBackground(Void... unused) {
+        protected String doInBackground(Void... unused) {
 
             /* 인풋 파라메터값 생성 */
             String param = "u_id=" + id + "&u_pw=" + pwd + "";
@@ -171,18 +172,17 @@ public class LoginActivity extends AppCompatActivity{
                 if(data.equals("success"))
                 {
                     Log.e("RESULT","성공적으로 처리되었습니다!");
-
-                    Intent intent = new Intent(LoginActivity.this, StartActivity.class);
-                    startActivity(intent);
-                    finish();
+                    return data;
                 }
                 else if(data.equals("failure"))
                 {
                     Log.e("RESULT","비밀번호가 일치하지 않습니다.");
+                    return data;
                 }
                 else
                 {
                     Log.e("RESULT","에러 발생! ERRCODE = " + data);
+                    return data;
                 }
 
             } catch (MalformedURLException e) {
@@ -195,9 +195,16 @@ public class LoginActivity extends AppCompatActivity{
         }
 
         @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            if(s.equals("success"))
+            {
+                Intent intent = new Intent(LoginActivity.this, StartActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(intent);
+                finish();
+            }else
+                Toast.makeText(getApplicationContext(), "비밀번호가 일치하지 않습니다.",Toast.LENGTH_LONG).show();
 
         }
     }
