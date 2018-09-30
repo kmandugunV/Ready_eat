@@ -18,7 +18,6 @@ import android.widget.Toast;
 
 public class RegisterActivity extends AppCompatActivity{
 
-    boolean loginFlag;
     Button btn_next;
 
 
@@ -28,29 +27,24 @@ public class RegisterActivity extends AppCompatActivity{
         setContentView(R.layout.activity_register);
 
 
-        Intent intent = getIntent();
-        loginFlag = intent.getBooleanExtra("loginFlag", false);
 
         btn_next = (Button)findViewById(R.id.btn_next);
         btn_next.setOnClickListener(new Button.OnClickListener() {
-                                            public void onClick(View v) {
-                                                CheckBox check1, check2, check3, check4;
-                                                check1 = (CheckBox)findViewById(R.id.checkBox);
-                                                check2 = (CheckBox)findViewById(R.id.checkBox2);
-                                                check3 = (CheckBox)findViewById(R.id.checkBox3);
-                                                check4 = (CheckBox)findViewById(R.id.checkBox4);
-                                                if(check1.isChecked() == true && check2.isChecked() == true && check3.isChecked() == true && check4.isChecked() == true)
-                                                {
-                                                    Intent intent = new Intent(RegisterActivity.this, Register2Activity.class);
-                                                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                                                    intent.putExtra("loginFlag",loginFlag);
-
-                                                    startActivity(intent);
-                                                }else
-                                                    Toast.makeText(getApplicationContext(), "체크박스를 전부 체크해주세요.", Toast.LENGTH_SHORT).show();
-                                            }
-                                        }
-        );
+            public void onClick(View v) {
+                CheckBox check1, check2, check3, check4;
+                check1 = (CheckBox)findViewById(R.id.checkBox);
+                check2 = (CheckBox)findViewById(R.id.checkBox2);
+                check3 = (CheckBox)findViewById(R.id.checkBox3);
+                check4 = (CheckBox)findViewById(R.id.checkBox4);
+                if(check1.isChecked() == true && check2.isChecked() == true && check3.isChecked() == true && check4.isChecked() == true)
+                {
+                    Intent intent = new Intent(RegisterActivity.this, Register2Activity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                    startActivity(intent);
+                }else
+                Toast.makeText(getApplicationContext(), "체크박스를 전부 체크해주세요.", Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 
@@ -77,16 +71,6 @@ public class RegisterActivity extends AppCompatActivity{
                 break;
 
             case R.id.action_user:
-                if(loginFlag == true)
-                {
-
-                }else
-                {
-                    Intent intent=new Intent(this, LoginActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                    intent.putExtra("loginFlag",loginFlag);
-                    startActivity(intent);
-                }
                 break;
 
             case android.R.id.home:

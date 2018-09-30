@@ -9,7 +9,6 @@ import android.view.WindowManager;
 
 public class MainActivity extends Activity {
 
-    boolean loginFlag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,10 +26,8 @@ public class MainActivity extends Activity {
                     Thread.sleep(2000);
                 }catch(Exception e){}
 
-                loginFlag = false;
-                Intent intent=new Intent(MainActivity.this, StartActivity.class);
+                Intent intent=new Intent(MainActivity.this, LoginActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                intent.putExtra("loginFlag",loginFlag);
 
                 startActivity(intent);
                 finish();

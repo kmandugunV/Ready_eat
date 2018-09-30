@@ -27,12 +27,10 @@ import java.net.URLEncoder;
 
 public class Register2Activity extends AppCompatActivity{
 
-    boolean loginFlag;
-
     private EditText name_regi2;
     private EditText birth_regi2;
     private EditText id_regi2;
-    private EditText pwd_regi2;
+    private EditText pwd_regi2,pwd2_regi2;
     private EditText phone_regi2;
 
 
@@ -45,10 +43,72 @@ public class Register2Activity extends AppCompatActivity{
         birth_regi2 = (EditText)findViewById(R.id.birth_regi2);
         id_regi2 = (EditText)findViewById(R.id.id_regi2);
         pwd_regi2 = (EditText)findViewById(R.id.pwd_regi2);
+        pwd2_regi2 = (EditText)findViewById(R.id.pwd2_regi2);
         phone_regi2 = (EditText)findViewById(R.id.phone_regi2);
 
-        Intent intent = getIntent();
-        loginFlag = intent.getExtras().getBoolean("loginFlag");
+
+        name_regi2.setOnFocusChangeListener(new View.OnFocusChangeListener()
+        {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus)
+                {
+                    name_regi2.setText("");
+                }
+            }
+        });
+        birth_regi2.setOnFocusChangeListener(new View.OnFocusChangeListener()
+        {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus)
+                {
+                    birth_regi2.setText("");
+                }
+            }
+        });
+        id_regi2.setOnFocusChangeListener(new View.OnFocusChangeListener()
+        {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus)
+                {
+                   id_regi2.setText("");
+                }
+            }
+        });
+        pwd_regi2.setOnFocusChangeListener(new View.OnFocusChangeListener()
+        {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus)
+                {
+                    pwd_regi2.setText("");
+                }
+            }
+        });
+
+        pwd2_regi2.setOnFocusChangeListener(new View.OnFocusChangeListener()
+        {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus)
+                {
+                    pwd2_regi2.setText("");
+                }
+            }
+        });
+
+        phone_regi2.setOnFocusChangeListener(new View.OnFocusChangeListener()
+        {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus)
+                {
+                    phone_regi2.setText("");
+                }
+            }
+        });
 
         ActionBar ab = getSupportActionBar();
         ab.setDisplayShowTitleEnabled(true);
@@ -60,19 +120,25 @@ public class Register2Activity extends AppCompatActivity{
         btn_regi.setOnClickListener(new Button.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Register2Activity.this, Register_CommitActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                intent.putExtra("loginFlag",loginFlag);
+
 
                 String name = name_regi2.getText().toString();
                 String birth = birth_regi2.getText().toString();
                 String id = id_regi2.getText().toString();
                 String pwd = pwd_regi2.getText().toString();
+                String pwd2 = pwd2_regi2.getText().toString();
                 String phone = phone_regi2.getText().toString();
 
-                insertoToDatabase(name, birth, id, pwd, phone);
+                if(pwd.equals(pwd2))
+                {
+                    insertoToDatabase(name, birth, id, pwd, phone);
 
-                startActivity(intent);
+                    Intent intent = new Intent(Register2Activity.this, Register_CommitActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                    startActivity(intent);
+                }else
+                    Toast.makeText(Register2Activity.this, "CHECK PASSWORD!", Toast.LENGTH_SHORT).show();
+
             }
         });
     }
@@ -92,6 +158,7 @@ public class Register2Activity extends AppCompatActivity{
                 loading.dismiss();
                 Toast.makeText(getApplicationContext(), s, Toast.LENGTH_LONG).show();
             }
+
             @Override
             protected String doInBackground(String... params) {
 
@@ -102,7 +169,8 @@ public class Register2Activity extends AppCompatActivity{
                     String Pwd = (String) params[3];
                     String Phone = (String) params[4];
 
-                    String link = "http://localhost/post.php";
+                    //String link = "http://localhost/post.php";
+                    String link = "http://172.30.1.6/post.php";
                     String data = URLEncoder.encode("Name", "UTF-8") + "=" + URLEncoder.encode(Name, "UTF-8");
                     data += "&" + URLEncoder.encode("Birth", "UTF-8") + "=" + URLEncoder.encode(Birth, "UTF-8");
                     data += "&" + URLEncoder.encode("Id", "UTF-8") + "=" + URLEncoder.encode(Id, "UTF-8");
@@ -135,8 +203,8 @@ public class Register2Activity extends AppCompatActivity{
             }
         }
         InsertData task = new InsertData();
-        task.execute(Id, Pwd);
-    }
+        task.execute(Name, Birth, Id, Pwd, Phone);
+    }//insertToDatabase()
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -160,16 +228,7 @@ public class Register2Activity extends AppCompatActivity{
                 break;
 
             case R.id.action_user:
-                if(loginFlag == true)
-                {
 
-                }else
-                {
-                    Intent intent=new Intent(this, LoginActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                    intent.putExtra("loginFlag",loginFlag);
-                    startActivity(intent);
-                }
                 break;
 
             case android.R.id.home:

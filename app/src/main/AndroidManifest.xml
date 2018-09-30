@@ -23,8 +23,11 @@
         <activity android:name=".FindChooseActivity"></activity>
         <activity android:name=".FindIdActivity"></activity>
         <activity android:name=".FindPwdActivity"></activity>
+        <activity android:name=".FindedIdActivity"></activity>
+        <activity android:name=".FindedPwdActivity"></activity>
 
     </application>
 
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+
 </manifest>

@@ -38,7 +38,7 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/name_findid2"
+                android:id="@+id/name_findpwd2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
@@ -67,7 +67,7 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/phone_findid2"
+                android:id="@+id/phone_findpwd2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
@@ -96,7 +96,7 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/id_find2"
+                android:id="@+id/id_findpwd2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"

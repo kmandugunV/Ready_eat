@@ -47,7 +47,7 @@
                 android:background="@drawable/blackborder"
                 android:ems="10"
                 android:inputType="textPersonName"
-                android:text="  이름"
+                android:text="이름"
                 android:textSize="16sp" />
 
         </LinearLayout>
@@ -77,7 +77,7 @@
                 android:background="@drawable/blackborder"
                 android:ems="10"
                 android:inputType="textPersonName"
-                android:text="  생년월일"
+                android:text="생년월일"
                 android:textSize="16sp" />
 
         </LinearLayout>
@@ -107,7 +107,7 @@
                 android:background="@drawable/blackborder"
                 android:ems="10"
                 android:inputType="textPersonName"
-                android:text="  ID"
+                android:text="ID"
                 android:textSize="16sp" />
 
         </LinearLayout>
@@ -137,7 +137,7 @@
                 android:background="@drawable/blackborder"
                 android:ems="10"
                 android:inputType="textPersonName"
-                android:text="  비밀번호"
+                android:text="비밀번호"
                 android:textSize="16sp" />
 
         </LinearLayout>
@@ -167,7 +167,7 @@
                 android:background="@drawable/blackborder"
                 android:ems="10"
                 android:inputType="textPersonName"
-                android:text="  비밀번호 확인"
+                android:text="비밀번호 확인"
                 android:textSize="16sp" />
 
         </LinearLayout>
@@ -197,7 +197,7 @@
                 android:background="@drawable/blackborder"
                 android:ems="10"
                 android:inputType="textPersonName"
-                android:text="  연락처"
+                android:text="연락처"
                 android:textSize="16sp" />
 
         </LinearLayout>

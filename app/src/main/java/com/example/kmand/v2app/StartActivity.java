@@ -14,30 +14,34 @@ import android.widget.Button;
 public class StartActivity extends AppCompatActivity {
 
     Adfragment adFragment;
-    boolean loginFlag;
-    Button btn_mypage;
+
+    Button btn_reserve,btn_mypage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
 
-        Intent intent = getIntent();
-        loginFlag = intent.getExtras().getBoolean("loginFlag");
 
         FragmentManager manager = getSupportFragmentManager();
         adFragment = (Adfragment) manager.findFragmentById(R.id.adFragment);
         adFragment.changeimage();
 
+        btn_reserve = (Button)findViewById(R.id.btn_reserve);
+        btn_reserve.setOnClickListener(new Button.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                //
+            }
+        });
         btn_mypage = (Button)findViewById(R.id.btn_mypage);
         btn_mypage.setOnClickListener(new Button.OnClickListener() {
-                                            public void onClick(View v) {
-                                                Intent intent = new Intent(StartActivity.this , LoginActivity.class);
-                                                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                                                intent.putExtra("loginFlag",loginFlag);
-                                                startActivity(intent);
-                                            }
-                                        }
-        );
+            @Override
+             public void onClick(View v) {
+                Intent intent = new Intent(StartActivity.this , LoginActivity.class);
+                //intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(intent);
+            }
+        });
 
     }
 
@@ -63,16 +67,7 @@ public class StartActivity extends AppCompatActivity {
                 break;
 
             case R.id.action_user:
-                if(loginFlag == true)
-                {
 
-                }else
-                {
-                    Intent intent = new Intent(StartActivity.this, LoginActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                    intent.putExtra("loginFlag",loginFlag);
-                    startActivity(intent);
-                }
                 break;
 
             case android.R.id.home:
